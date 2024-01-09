@@ -1,0 +1,9 @@
+﻿using Xunit;
+
+namespace ContentManagementSystem.EntityFrameworkCore;
+
+[CollectionDefinition(ContentManagementSystemTestConsts.CollectionDefinitionName)]
+public class ContentManagementSystemEntityFrameworkCoreCollection : ICollectionFixture<ContentManagementSystemEntityFrameworkCoreFixture>
+{
+
+}
