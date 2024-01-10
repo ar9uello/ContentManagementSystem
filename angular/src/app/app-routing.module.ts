@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContentComponent } from './content/content.component';
+import { ContentFormComponent } from './content-form/content-form.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,8 @@ const routes: Routes = [
   },
 
   { path: 'content/:id', component: ContentComponent },
+
+  { path: 'content-form', component: ContentFormComponent },
 ];
 
 @NgModule({

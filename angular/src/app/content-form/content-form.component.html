@@ -1,0 +1,17 @@
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <div class="mt-2">
+        <label for="content-name">Name</label><span> * </span>
+        <input type="text" id="content-name" class="form-control" formControlName="name" autofocus />
+    </div>
+
+    <div class="mt-2">
+        <label for="content-htmlContent">Html Content</label><span> * </span>
+        <ngx-wig id="content-htmlContent" formControlName="htmlContent" />
+    </div>
+
+    <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid || isSaving">
+        <i class="fa fa-check mr-1"></i>
+        Save
+  </button>
+</form>

@@ -1,6 +1,5 @@
-import { RoutesService, eLayoutType } from '@abp/ng.core';
 import { Component } from '@angular/core';
-import { ContentService } from '@proxy/contents/content.service';
+import { MenuService } from '@proxy/menu.service';
 
 @Component({
   selector: 'app-root',
@@ -12,23 +11,11 @@ import { ContentService } from '@proxy/contents/content.service';
 export class AppComponent {
 
   constructor(
-    private contentService: ContentService,
-    private routesService: RoutesService
+    private menuService: MenuService
   ) { }
 
   ngOnInit() {
-    this.contentService.GetAll().subscribe(data => {
-      data.items.forEach((route) => {
-        this.routesService.add([
-          {
-            path: `/content/${route.id}`,
-            name: `::${route.name}`,
-            iconClass: 'fas fa-link',
-            layout: eLayoutType.application,
-          },
-        ]);
-      });
-    });
+    this.menuService.refresh();
   }
 
 }

@@ -13,7 +13,7 @@ public class ContentController(IContentAppService appService) : ContentManagemen
 
     [HttpPost]
     [Route("InsertOrUpdateCMSContent")]
-    public async Task<ContentDto> InsertOrUpdateCMSContent(CreateUpdateContentDto input)
+    public async Task<ContentDto> InsertOrUpdateCMSContent([FromBody]CreateUpdateContentDto input)
     {
         if (input.Guid.HasValue)
             return await _appService.UpdateAsync(input.Guid.Value, input);
@@ -34,5 +34,12 @@ public class ContentController(IContentAppService appService) : ContentManagemen
     {
         var input = new PagedAndSortedResultRequestDto();
         return _appService.GetListAsync(input);
+    }
+
+    [HttpDelete]
+    [Route("Remove/{id}")]
+    public Task Remove(Guid id)
+    {
+        return _appService.DeleteAsync(id);
     }
 }

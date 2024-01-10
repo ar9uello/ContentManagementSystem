@@ -1,12 +1,14 @@
 import { PagedResultDto, RestService } from "@abp/ng.core";
 import { Injectable } from "@angular/core";
-import { ContentDto } from "./models";
+import { ContentDto, CreateUpdateContentDto } from "./models";
 
 @Injectable({
     providedIn: 'root',
 })
 export class ContentService {
     apiName = 'Default';
+
+    constructor(private restService: RestService) { }
 
     getContent = (id: string) =>
         this.restService.request<any, ContentDto>({
@@ -22,5 +24,11 @@ export class ContentService {
         },
             { apiName: this.apiName });
 
-    constructor(private restService: RestService) { }
+    InsertOrUpdateCMSContent = (body: CreateUpdateContentDto) =>
+        this.restService.request<any, ContentDto>({
+            method: 'POST',
+            url: `/api/content/InsertOrUpdateCMSContent`,
+            body: body
+        },
+            { apiName: this.apiName });
 }
