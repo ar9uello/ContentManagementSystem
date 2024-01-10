@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ContentManagementSystem.Contents;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -18,12 +19,13 @@ namespace ContentManagementSystem.EntityFrameworkCore;
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ConnectionStringName("Default")]
-public class ContentManagementSystemDbContext :
-    AbpDbContext<ContentManagementSystemDbContext>,
+public class ContentManagementSystemDbContext(DbContextOptions<ContentManagementSystemDbContext> options) :
+    AbpDbContext<ContentManagementSystemDbContext>(options),
     IIdentityDbContext,
     ITenantManagementDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
+    public DbSet<Content> Contents { get; set; }
 
     #region Entities from the modules
 
@@ -53,12 +55,6 @@ public class ContentManagementSystemDbContext :
 
     #endregion
 
-    public ContentManagementSystemDbContext(DbContextOptions<ContentManagementSystemDbContext> options)
-        : base(options)
-    {
-
-    }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -76,11 +72,14 @@ public class ContentManagementSystemDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(ContentManagementSystemConsts.DbTablePrefix + "YourEntities", ContentManagementSystemConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Content>(entity =>
+        {
+            entity.Property(x => x.Name)
+                .HasColumnType("VARCHAR(200)");
+
+            entity.Property(x => x.HtmlContent)
+                .HasColumnType("VARBINARY(MAX)"); 
+        });
+
     }
 }
