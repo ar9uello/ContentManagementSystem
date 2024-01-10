@@ -1,4 +1,4 @@
-import { RestService } from "@abp/ng.core";
+import { PagedResultDto, RestService } from "@abp/ng.core";
 import { Injectable } from "@angular/core";
 import { ContentDto } from "./models";
 
@@ -12,6 +12,13 @@ export class ContentService {
         this.restService.request<any, ContentDto>({
             method: 'GET',
             url: `/api/content/GetCMSContent/${id}`,
+        },
+            { apiName: this.apiName });
+
+    GetAll = () =>
+        this.restService.request<any, PagedResultDto<ContentDto>>({
+            method: 'GET',
+            url: `/api/content/GetAll`,
         },
             { apiName: this.apiName });
 

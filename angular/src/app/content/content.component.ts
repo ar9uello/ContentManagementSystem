@@ -17,9 +17,7 @@ export class ContentComponent {
     private route: ActivatedRoute,
     private contentService: ContentService,
     private sanitizer: DomSanitizer
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
