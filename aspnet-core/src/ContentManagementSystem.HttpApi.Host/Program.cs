@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using Volo.Abp.Modularity.PlugIns;
 
 namespace ContentManagementSystem;
 
@@ -32,7 +33,7 @@ public class Program
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
-            await builder.AddApplicationAsync<ContentManagementSystemHttpApiHostModule>();
+            await builder.AddApplicationAsync<ContentManagementSystemHttpApiHostModule>(options => { options.PlugInSources.Add(new FolderPlugInSource("C:\\TEMP\\MyPlugIns")); });
             var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();
