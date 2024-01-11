@@ -56,6 +56,7 @@ This feature will also offer a user-friendly, responsive HTML interface enabling
 In the Frontend (FE) part, as angular was also mentioned, I did the project with angular.
 
 - Display each content entry (page) as a new item in the main navigation:
+
 ![image](https://github.com/ar9uello/ContentManagementSystem/assets/55641229/3ba69f8b-273f-4b7f-8965-24a36598bc5f)
 
 - Create new pages. Consider using free WYSIWYG editing controls for an optimal user experience.
