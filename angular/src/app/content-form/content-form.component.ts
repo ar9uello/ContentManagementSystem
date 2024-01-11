@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +9,7 @@ import { NgxWigModule } from 'ngx-wig';
 @Component({
   selector: 'app-content-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgxWigModule],
+  imports: [ReactiveFormsModule, NgxWigModule, CommonModule],
   templateUrl: './content-form.component.html',
   styleUrl: './content-form.component.scss'
 })
@@ -30,8 +31,8 @@ export class ContentFormComponent {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
       this.form = this.fb.group({
-        name: ['', Validators.required],
-        htmlContent: ['', Validators.required],
+        name: ['', [Validators.required, Validators.maxLength(200)]],
+        htmlContent: ['', [Validators.required, Validators.maxLength(500)]],
       });
 
       if (this.id) {
@@ -55,10 +56,12 @@ export class ContentFormComponent {
     formData.htmlContent = btoa(this.form.value.htmlContent);
 
     this.contentService.InsertOrUpdateCMSContent(formData)
-      .subscribe(data => {
-        this.menuService.refresh(this.originalName);
-        this.router.navigate([`/content/${data.id}`]);
+      .subscribe({
+        next: data => {
+          this.menuService.refresh(this.originalName);
+          this.router.navigate([`/content/${data.id}`]);
+        },
+        error: () => this.isSaving = false
       });
-
   }
 }

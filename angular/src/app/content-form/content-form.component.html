@@ -2,11 +2,17 @@
     <div class="mt-2">
         <label for="content-name">Name</label><span> * </span>
         <input type="text" id="content-name" class="form-control" formControlName="name" autofocus />
+        <div *ngIf="form.get('name')?.hasError('maxlength')" class="text-red">
+            Content-Length Exceeded
+        </div>
     </div>
 
     <div class="mt-2">
         <label for="content-htmlContent">Html Content</label><span> * </span>
         <ngx-wig id="content-htmlContent" formControlName="htmlContent" />
+        <div *ngIf="form.get('htmlContent')?.hasError('maxlength')" class="text-red">
+            Content-Length Exceeded
+        </div>
     </div>
 
     <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid || isSaving">

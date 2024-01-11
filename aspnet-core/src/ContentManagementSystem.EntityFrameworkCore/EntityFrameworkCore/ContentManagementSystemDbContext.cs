@@ -78,7 +78,7 @@ public class ContentManagementSystemDbContext(DbContextOptions<ContentManagement
                 .HasColumnType("VARCHAR(200)");
 
             entity.Property(x => x.HtmlContent)
-                .HasColumnType("VARBINARY(MAX)"); 
+                .HasColumnType("VARBINARY(500)"); 
         });
 
     }

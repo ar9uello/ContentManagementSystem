@@ -13,5 +13,6 @@ public class CreateUpdateContentDto
     public string Name { get; set; }
 
     [Required]
+    [MaxLength(500)]
     public byte[] HtmlContent { get; set; }
 }
