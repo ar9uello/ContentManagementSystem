@@ -29,8 +29,8 @@ const routes: Routes = [
   },
 
   { path: 'content/:id', component: ContentComponent },
-
   { path: 'content-form', component: ContentFormComponent },
+  { path: 'content-form/:id', component: ContentFormComponent },
 ];
 
 @NgModule({

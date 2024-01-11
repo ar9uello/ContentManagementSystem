@@ -1,1 +1,7 @@
+<div class="d-flex justify-content-center" *ngIf="hasLoggedIn">
+    <button class="btn btn-primary" [routerLink]="['/content-form', id]">
+        Update Content 
+    </button>
+</div>
+
 <div [innerHtml]="content"></div>

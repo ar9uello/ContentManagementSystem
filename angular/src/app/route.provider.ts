@@ -10,7 +10,7 @@ function configureRoutes(routesService: RoutesService) {
     routesService.add([
       {
         path: '/',
-        name: '::Menu:Home',
+        name: '::Login',
         iconClass: 'fas fa-home',
         order: 1,
         layout: eLayoutType.application,

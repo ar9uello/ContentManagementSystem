@@ -13,7 +13,11 @@ export class MenuService {
         private authService: AuthService,
     ) { }
 
-    refresh() {
+    refresh(removeOriginalName?: string) {
+
+        if (removeOriginalName)
+            this.routesService.remove([`::${removeOriginalName}`])
+
         this.contentService.GetAll().subscribe(data => {
 
             data.items.forEach((route) => {
